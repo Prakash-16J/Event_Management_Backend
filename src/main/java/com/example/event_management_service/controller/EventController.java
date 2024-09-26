@@ -47,4 +47,10 @@ public class EventController {
        return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/{eventId}/addVendor/{vendorId}")
+    public ResponseEntity<String> addVendorToEvent(@PathVariable Long eventId, @PathVariable Long vendorId) {
+        eventService.addVendorToEvent(eventId, vendorId);
+        return ResponseEntity.ok("Vendor added to event successfully");
+    }
+
 }

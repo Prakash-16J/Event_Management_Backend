@@ -22,18 +22,15 @@ public class Event {
 
 
     @Id
-     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    String name;
-    LocalDate date;
-    String location;
-    Long budget;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String name;
+    private LocalDate date;
+    private String location;
 
-    @ManyToMany
-    @JoinTable(
-            name = "event_vendor",
-            joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "vendor_id"))
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Vendor> vendors = new ArrayList<>();
 
 
@@ -46,6 +43,9 @@ public class Event {
         guest.setEvent(this);
     }
 
+    @OneToOne(mappedBy = "event", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Budget budget;
 
 
 }
