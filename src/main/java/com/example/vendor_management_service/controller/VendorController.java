@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/Vendors")
+@CrossOrigin("http://localhost:4200")
 public class VendorController {
     @Autowired
     private VendorService vendorService;
